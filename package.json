@@ -1,0 +1,22 @@
+{
+  "name": "cmdhandler",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "clear && node index.js",
+    "dev": "clear && nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "@discordjs/builders": "^0.10.0",
+    "@discordjs/rest": "^0.2.0-canary.0",
+    "discord-api-types": "^0.26.0",
+    "discord.js": "^13.4.0"
+  }
+}
