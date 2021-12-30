@@ -10,4 +10,5 @@ module.exports = (client) => {
             } 
         }
   })
+  console.log(`Loaded ${client.commands.size} commands`);
 };

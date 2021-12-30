@@ -26,7 +26,9 @@ const client = new Client({
 client.config = config;
 
 client.commands = new Collection();
+client.cooldowns = new Collection();
 client.slsCommands = new Collection();
+client.categories = require("fs").readdirSync(`./commands`);
 ["eventHandler", "commandHandler", "slsCmdHandler"]
     .filter(Boolean)
     .forEach(h => {

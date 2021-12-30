@@ -9,5 +9,5 @@ module.exports = (client) => {
 
     client.on(event.name, (...args) => event.execute(client, ...args));
   });
-
+  console.log(`Loaded ${events.length} events`);
 };

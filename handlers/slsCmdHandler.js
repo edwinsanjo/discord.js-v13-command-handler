@@ -4,8 +4,6 @@ const { Routes } = require('discord-api-types/v9');
 
 module.exports = (client) => {
   const cmds = fs.readdirSync("./slsCmds/").filter(f => f.split(".").pop() === "js");
-  
-  const TEST_GUILD_ID = client.config.testGuildIDS;
 
   const commands = [];
 
@@ -17,33 +15,32 @@ module.exports = (client) => {
 
   // When the client is ready, this only runs once
   client.once('ready', () => {
-      console.log('Ready!');
       // Registering the commands in the client
-      const CLIENT_ID = client.user.id;
       const rest = new REST({
           version: '9'
       }).setToken(client.config.token);
       (async () => {
+
           try {
-              if (!TEST_GUILD_ID) {
+              if (client.config.slashGlobal || !client.config.testGuildIDS) {
                   await rest.put(
-                      Routes.applicationCommands(CLIENT_ID), {
+                      Routes.applicationCommands(client.user.id), {
                           body: commands
                       },
                   );
-                  console.log('Successfully registered application commands globally');
+                  console.log('Loaded Slash Commands (GLOBAL)');
               } else {
                   await rest.put(
-                      Routes.applicationGuildCommands(CLIENT_ID, TEST_GUILD_ID), {
+                      Routes.applicationGuildCommands(client.user.id, client.config.testGuildIDS), {
                           body: commands
                       },
                   );
-                  console.log('Successfully registered application commands for development guild');
+                  console.log('Loaded Slash Commands (DEVELOPMENT)');
               }
-          } catch (error) {
-              if (error) console.error(error);
-          }
+          } catch (e) { console.error(e); }
+          
       })();
+      console.log(`Ready! Logged in as ${client.user.tag}`);
   });
 
 };
