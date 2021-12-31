@@ -34,6 +34,7 @@ module.exports = {
           const embed = new MessageEmbed()
             .setColor('RANDOM')
             .setTitle('❓ HELP')
+            .setDescription("use `help [commandname]` to get more information about a specific command")
             .setThumbnail(client.user.displayAvatarURL())
             .setTimestamp()
             .setFooter('<Required> and [optional]');

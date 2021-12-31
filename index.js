@@ -1,5 +1,7 @@
 const config = require(`./config.js`);
 const { Client, Intents, Collection } = require('discord.js');
+const mongoose = require("mongoose");
+const colors = require("colors")
 
 
 // Creating the new client instance
@@ -21,6 +23,11 @@ const client = new Client({
     // Intents.FLAGS.DIRECT_MESSAGE_REACTIONS,
     Intents.FLAGS.DIRECT_MESSAGE_TYPING
   ]
+});
+
+mongoose.connect(config.mongo, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
 
 client.config = config;

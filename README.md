@@ -34,3 +34,4 @@ the next step is to run the bot and see if the bot is working
 ```bash
   npm start
 ```
+this command will run the bot

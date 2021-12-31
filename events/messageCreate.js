@@ -1,9 +1,26 @@
 const fs = require("fs");
+const GuildSettings = require("../models/settings.js")
+const GuildCommands = require("../models/commands.js");
+const { log } = require("console");
 
 module.exports = {
 	name: 'messageCreate',
-	execute(client, message) {
-        const prefix = "-";
+	async execute(client, message) {
+        let storedSettings = await GuildSettings.findOne({
+          GuildID: message.guild.id,
+        });
+        if (!storedSettings) {
+          // If there are no settings stored for this guild, we create them and try to retrive them again.
+          const newSettings = new GuildSettings({
+            GuildID: message.guild.id,
+          });
+          await newSettings.save().catch((e) => {
+            console.log(e);
+          });
+          storedSettings = await GuildSettings.findOne({ GuildID: message.guild.id });
+        }
+
+        const prefix = storedSettings.Prefix;
         if (message.author.bot) return;
         if (message.content.indexOf(prefix) !== 0) return;
         const args = message.content.slice(prefix.length).trim().split(/ +/g);
@@ -30,7 +47,14 @@ module.exports = {
                 }).then(msg => {setTimeout(()=>{msg.delete().catch((e) => {console.log(String(e).grey)})}, "You Are not Allowed to execute this command")}).catch((e) => {console.log(String(e).grey)});
             }
 
-            cmd.run(client, message, args);
+            let check = await GuildCommands.findOne({ GuildID: message.guild.id, })
+          
+            if(check && check.cmds && check.cmds.includes(cmd.name)) {
+              message.channel.send("Command Disabled")
+            }else {
+              //run the command when not disabled with the parameters:  client, message, args, Cmduser, text, prefix,
+              cmd.run(client, message, args);
+            }
 
 
         } catch (error) {

@@ -40,7 +40,6 @@ module.exports = (client) => {
           } catch (e) { console.error(e); }
           
       })();
-      console.log(`Ready! Logged in as ${client.user.tag}`);
   });
 
 };
