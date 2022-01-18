@@ -22,7 +22,7 @@ module.exports = (client) => {
       (async () => {
 
           try {
-              if (client.config.slashGlobal || !client.config.testGuildIDS) {
+              if (client.config.slashGlobal || !client.config.testGuildID) {
                   await rest.put(
                       Routes.applicationCommands(client.user.id), {
                           body: commands
@@ -31,7 +31,7 @@ module.exports = (client) => {
                   console.log('Loaded Slash Commands (GLOBAL)');
               } else {
                   await rest.put(
-                      Routes.applicationGuildCommands(client.user.id, client.config.testGuildIDS), {
+                      Routes.applicationGuildCommands(client.user.id, client.config.testGuildID), {
                           body: commands
                       },
                   );
