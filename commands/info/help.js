@@ -1,11 +1,18 @@
-const { MessageEmbed } = require("discord.js");
+const { MessageEmbed, Client, Message } = require("discord.js");
 
 module.exports = {
   name: "help", 
-  description: "Returns all Commmands, or one specific command", 
+  description: "Returns Details About a all Command or a Commmand", 
   category: "info", 
-  syntax: "help [Commandname]", 
+  syntax: "help [Command_Name]", 
   cooldown: 5,
+
+  /**
+   * 
+   * @param {Client} client 
+   * @param {Message} message 
+   */
+
     run: async (client, message, args) => {
       try {
         

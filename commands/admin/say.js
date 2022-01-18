@@ -3,7 +3,7 @@ module.exports = {
     description: "Sends Back arg[1]", 
     category: "admin", 
     aliases: ["echo"],
-    syntax: "say <anyMessage>", 
+    syntax: "say <Any_Message>", 
     permissions: ["ADMINISTRATOR"],
     // owner: true,
       run: async (client, message, args) => {
